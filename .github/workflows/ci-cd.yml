@@ -37,21 +37,20 @@ jobs:
 
       - name: ECS deploy
         run: |
-          ecs-deploy \
+          ECS-deploy \
             --cluster ${{ secrets.ECS_CLUSTER }} \
             --service ${{ secrets.ECS_SERVICE }} \
             --image ${{ secrets.ECR_REPOSITORY_URI }}:latest
 
       - name: Integration Tests
         run: |
-          # Add your integration test commands here
-          echo "Running integration tests..."
+          echo "Integration tests are not set up. Skipping this step."
 
       - name: Rollback if failed
         if: failure()
         run: |
           echo "Deployment failed. Performing rollback..."
-          ecs-deploy \
+          ECS-deploy \
             --cluster ${{ secrets.ECS_CLUSTER }} \
             --service ${{ secrets.ECS_SERVICE }} \
             --image ${{ secrets.ECR_REPOSITORY_URI }}:previous
